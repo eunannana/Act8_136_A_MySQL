@@ -57,19 +57,23 @@ public class TemanBaru extends AppCompatActivity {
         tlp = tTelpon.getText().toString();
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        StringRequest strReq = new StringRequest(Request.Method.POST, url_insert, response -> {
-            Log.d(TAG,"response : " + response.toString());
-        try {
-            JSONObject jObj = new JSONObject(response);
-            success = jObj.getInt(TAG_SUCCESS);
-            if (success == 1) {
-                Toast.makeText(TemanBaru.this, "Successfully saved Data", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(TemanBaru.this, "Failed", Toast.LENGTH_SHORT).show();
+        StringRequest strReq = new StringRequest(Request.Method.POST, url_insert, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "response : " + response.toString());
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    success = jObj.getInt(TAG_SUCCESS);
+                    if (success == 1) {
+                        Toast.makeText(TemanBaru.this, "Successfully saved Data", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(TemanBaru.this, "Failed", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
-        }catch(JSONException e){
-                e.printStackTrace();
-            }},new Response.ErrorListener(){
+        },new Response.ErrorListener(){
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Error : " + error.getMessage());
