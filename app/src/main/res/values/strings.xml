@@ -8,4 +8,6 @@
     <string name="tnotelp">No Telepon</string>
     <string name="tcreatedata">Create Data</string>
     <string name="tview">View</string>
+    <string name="tedit">edit</string>
+    <string name="tdelete">delete</string>
 </resources>

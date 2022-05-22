@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton fab;
     private ArrayList<Teman> temanArrayList = new ArrayList<>();
 
-
     private static final String TAG = MainActivity.class.getSimpleName();
     private static String url_select = "http://10.0.2.2/umyTI/bacateman.php";
     public static final String TAG_ID = "id";
@@ -53,16 +52,17 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        fab.setOnClickListener(new View.OnClickListener(){
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                Intent intent = new Intent(MainActivity.this,TemanBaru.class);
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, TemanBaru.class);
                 startActivity(intent);
             }
         });
     }
-    public void BacaData() {
 
+    public void BacaData() {
+        temanArrayList.clear();
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
         JsonArrayRequest jArr = new JsonArrayRequest(url_select, new Response.Listener<JSONArray>() {
@@ -85,11 +85,15 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+                adapter.notifyDataSetChanged();
             }
-        }, error -> {
-            VolleyLog.d(TAG, "Error : " + error.getMessage());
-            error.printStackTrace();
-            Toast.makeText(MainActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error : " + error.getMessage());
+                error.printStackTrace();
+                Toast.makeText(MainActivity.this, "FAILED", Toast.LENGTH_SHORT).show();
+            }
         });
         requestQueue.add(jArr);
     }
