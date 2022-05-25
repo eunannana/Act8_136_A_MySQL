@@ -117,7 +117,7 @@ public class TemanAdapter extends RecyclerView.Adapter<TemanAdapter.TemanViewHol
     }
 
     private void DeleteData(final String idx){
-        String url_update = "http://10.0.2.2/umyTI/deletetm.php";
+        String url_update = "http://20200140136.praktikumtiumy.com/deletetm.php";
         final String TAG = MainActivity.class.getSimpleName();
         final String TAG_SUCCESS = "success";
         final int[] success = new int[1];

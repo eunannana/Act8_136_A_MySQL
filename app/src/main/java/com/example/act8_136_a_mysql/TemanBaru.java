@@ -29,7 +29,7 @@ public class TemanBaru extends AppCompatActivity {
     String nm, tlp;
     int success;
 
-    private static String url_insert = "http://10.0.2.2/umyTI/tambahtm.php";
+    private static String url_insert = "http://20200140136.praktikumtiumy.com/tambahtm.php";
     private static final String TAG = TemanBaru.class.getSimpleName();
     private static final String TAG_SUCCESS = "success";
 
